@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <nav class="relative bg-gray-800">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between">
+                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                    <div class="flex shrink-0 items-center">
+                        <a class="text-sm font-medium text-white">DIKAN WEB</a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:block">
+                        <div class="flex space-x-4">
+                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
+                            <a href="#" aria-current="page"
+                                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Tugas 1</a>
+                            <a href="#"
+                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Soon</a>
+                            <a href="#"
+                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Soon</a>
+                            <a href="#"
+                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Soon</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <el-disclosure id="mobile-menu" hidden class="block sm:hidden">
+            <div class="space-y-1 px-2 pt-2 pb-3">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
+                <a href="#" aria-current="page"
+                    class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white">Dashboard</a>
+                <a href="#"
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Team</a>
+                <a href="#"
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Projects</a>
+                <a href="#"
+                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Calendar</a>
+            </div>
+        </el-disclosure>
+    </nav>
+
+    <div class="max-w-4xl mx-auto p-6">
+        <header class="items-center gap-4 mb-6">
+            <div>
+                <h1 class="text-2xl font-semibold">Fuzzy, ANN (Artificial Neural Network), dan Genetic</h1>
+                <p class="text-slate-400 mt-1">Pengertian, Kelebihan-kekurangan, dan contoh implementasinya.</p>
+            </div>
+        </header>
+
+        <main class="space-y-6">
+            <section class="bg-gray-800 glass rounded-xl p-6 shadow-lg">
+                <h2 class="text-lg font-semibold mb-3 text-slate-200">Pengertian</h2>
+                <ul class="list-disc pl-5 space-y-2 text-slate-200">
+                    <li><strong>Fuzzy Logic (logika fuzzy)</strong> - Sistem berbasis aturan untuk menangani
+                        ketidakpastian dan istilah linguistik (mis. "agak", "sedikit"). Menggunakan derajat kebenaran
+                        antara 0 dan 1. Biasanya rule-based (IF–THEN).</li>
+                    <li><strong>ANN (Artificial Neural Network)</strong> - Model pembelajaran yang meniru neuron
+                        biologis. <em>Belajar</em> dari data dengan menyesuaikan bobot (mis. backpropagation). Cocok
+                        untuk pola nonlinear dan pengenalan pola.</li>
+                    <li><strong>Genetic Algorithms (Algoritma Genetika)</strong> - Metode optimisasi berbasis evolusi
+                        (populasi, seleksi, crossover, mutasi). Bekerja baik pada fungsi yang tidak berdiferensi atau
+                        ruang solusi besar.</li>
+                </ul>
+            </section>
+
+            <section class="bg-gray-800 glass rounded-xl p-6 shadow-lg overflow-x-auto">
+                <h2 class="text-lg font-semibold mb-3 text-slate-200">Perbedaan</h2>
+                <table class="w-full text-left table-auto border-collapse">
+                    <thead>
+                        <tr class="text-slate-300/80">
+                            <th class="px-4 py-2">Aspek</th>
+                            <th class="px-4 py-2">Fuzzy</th>
+                            <th class="px-4 py-2">ANN</th>
+                            <th class="px-4 py-2">Genetic</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-200">
+                        <tr class="border-t border-slate-700">
+                            <td class="px-4 py-3">Tujuan utama</td>
+                            <td class="px-4 py-3">Representasi pengetahuan & penalaran</td>
+                            <td class="px-4 py-3">Belajar pola dari data</td>
+                            <td class="px-4 py-3">Optimisasi / pencarian solusi</td>
+                        </tr>
+                        <tr class="border-t border-slate-700">
+                            <td class="px-4 py-3">Cara "belajar"</td>
+                            <td class="px-4 py-3">Aturan manual; bisa adaptif (neuro-fuzzy)</td>
+                            <td class="px-4 py-3">Pelatihan iteratif dari data</td>
+                            <td class="px-4 py-3">Evolusi populasi solusi</td>
+                        </tr>
+                        <tr class="border-t border-slate-700">
+                            <td class="px-4 py-3">Interpretabilitas</td>
+                            <td class="px-4 py-3">Tinggi (aturan jelas)</td>
+                            <td class="px-4 py-3">Rendah–sedang (black-box)</td>
+                            <td class="px-4 py-3">Sedang (solusi akhir dapat dianalisis)</td>
+                        </tr>
+                        <tr class="border-t border-slate-700">
+                            <td class="px-4 py-3">Ketergantungan data</td>
+                            <td class="px-4 py-3">Rendah</td>
+                            <td class="px-4 py-3">Tinggi</td>
+                            <td class="px-4 py-3">Bervariasi (butuh fungsi fitness)</td>
+                        </tr>
+                        <tr class="border-t border-slate-700">
+                            <td class="px-4 py-3">Kelebihan</td>
+                            <td class="px-4 py-3">Menangani bahasa manusia & ketidakpastian</td>
+                            <td class="px-4 py-3">Menangani pola kompleks, nonlinear</td>
+                            <td class="px-4 py-3">Menemukan solusi global</td>
+                        </tr>
+                        <tr class="border-t border-slate-700">
+                            <td class="px-4 py-3">Kelemahan</td>
+                            <td class="px-4 py-3">Sulit jika aturan banyak</td>
+                            <td class="px-4 py-3">Butuh data & tuning</td>
+                            <td class="px-4 py-3">Komputasi mahal; perlu tuning GA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="bg-gray-800 glass rounded-xl p-6 shadow-lg">
+                <h2 class="text-lg font-semibold mb-3 text-slate-200">Contoh penggunaan</h2>
+                <ul class="list-disc pl-5 space-y-2 text-slate-200">
+                    <li><strong>Fuzzy</strong>: Kontroler AC</li>
+                    <li><strong>ANN</strong>: Pengenalan citra</li>
+                    <li><strong>Genetic</strong>: Pencarian Rute pada aplikasi gojek.
+                    </li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+</body>
+
+</html>
