@@ -16,7 +16,7 @@ def index(request):
     }
     return render(request, 'tugas.html', context)
 
-def tugas2(request):
+def tugas3(request):
     items = {
         'A': {'weight': 7, 'value': 5},
         'B': {'weight': 2, 'value': 4},
@@ -39,4 +39,4 @@ def tugas2(request):
         'results': results,
         'best_result': best_result
     }
-    return render(request, 'tugas2.html', context)
+    return render(request, 'tugas3.html', context)
