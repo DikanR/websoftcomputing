@@ -43,7 +43,7 @@ def tugas3(request):
             mutation_rate = float(request.POST.get('mutation_rate')) 
         
         if items_count > 0 and len(weight) == items_count and len(value) == items_count and weight[0] != '' and value[0] != '' and capacity > 0 and generations > 0:
-            for i in range(int(items_count-1)):
+            for i in range(int(items_count)):
                 items[f'item {i+1}'] = {
                     # 'weight': int(weight[i]) if weight[i] != '' else 0,
                     'weight': int(weight[i]),
