@@ -184,18 +184,17 @@
 
             <section class="bg-gray-800 glass rounded-xl p-6 shadow-lg overflow-x-auto">
                 <h2 class="text-lg font-semibold mb-3 text-slate-200">Hasil Algoritma Genetika</h2>
-                <p class="text-md text-slate-200">
-                    Jarak terbaik ditemukan adalah <a class="font-bold">{{ best_dist }}</a> dengan rute :
-                </p>
-                <p class="text-md text-slate-200 mb-4">
-                    {%for city in best_route %}
-                        <a class="font-bold">{{ city }}</a>{% if not forloop.last %} &rarr; {% endif %}
-                    {%endfor%}
-                </p>
-                    
                 {% if items|length == 0 %}
                     <p class="text-md font-semibold text-slate-200">Menunggu input...</p>
                 {% else %}
+                    <p class="text-md text-slate-200">
+                        Jarak terbaik ditemukan adalah <a class="font-bold">{{ best_dist }}</a> dengan rute :
+                    </p>
+                    <p class="text-md text-slate-200 mb-4">
+                        {%for city in best_route %}
+                            <a class="font-bold">{{ city }}</a>{% if not forloop.last %} &rarr; {% endif %}
+                        {%endfor%}
+                    </p>
                     <p class="text-md font-semibold text-slate-200">History</p>
                     <table class="w-full text-left mb-3 table-auto border-collapse">
                         <thead>
