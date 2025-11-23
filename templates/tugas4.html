@@ -20,10 +20,10 @@
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
                             <a href="/"
                                 class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Tugas1</a>
+                            <a href="/tugas3"
+                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Tugas 3</a>
                             <a href="#" aria-current="page"
-                                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Tugas 3</a>
-                            <a href="/tugas4"
-                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Tugas 4</a>
+                                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Tugas 4</a>
                         </div>
                     </div>
                 </div>
@@ -49,36 +49,22 @@
         <header class="items-center gap-4 mb-6">
             <div>
                 <h1 class="text-2xl font-semibold">Genetic Algorithm</h1>
-                <p class="text-slate-400 mt-1">Penyelesaian knapsack problem menggunakan algoritima genetika.</p>
+                <p class="text-slate-400 mt-1">Penyelesaian traveling salesman problem menggunakan algoritima genetika.</p>
             </div>
         </header>
 
         <main class="space-y-6">
             <section class="bg-gray-800 glass rounded-xl p-6 shadow-lg">
                 <h2 class="text-lg font-semibold mb-3 text-slate-200">Masukan Nilai Fitur</h2>
-                <form method="post" action="{% url 'tugas3' %}" class="space-y-4" novalidate>
+                <form method="post" action="{% url 'tugas4' %}" class="space-y-4" novalidate>
                     {% csrf_token %}
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-slate-200">Jumlah barang</label>
+                            <label class="block text-sm font-medium text-slate-200">Jumlah Kota</label>
                             <input
-                            value="{{ items_count }}"
+                            value="{{ cities_count }}"
                             type="number"
-                            name="items_count"
-                            step="any"
-                            inputmode="numeric"
-                            pattern="[0-9]*"
-                            oninput="this.value = this.value.replace(/,/g,'.')"
-                            class="mt-1 block w-full rounded-md border border-gray-300 bg-slate-200 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                            autocomplete="off"
-                            >
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-200">Kapasitas maksimal weight</label>
-                            <input
-                            value="{{ capacity }}"
-                            type="number"
-                            name="capacity"
+                            name="cities_count"
                             step="any"
                             inputmode="numeric"
                             pattern="[0-9]*"
@@ -101,40 +87,6 @@
                             autocomplete="off"
                             >
                         </div>
-                    </div>
-                    {% if items_count_range|length > 0 %}
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                        {% for i in items_count_range %}
-                            <div>
-                                <label class="block text-sm font-medium text-slate-200">item {{ i }}</label>
-                                <div class="inline-flex gap-2">
-                                    <label class="block text-sm text-slate-200">weight</label>
-                                    <input
-                                    type="number"
-                                    name="weight[]"
-                                    step="any"
-                                    inputmode="decimal"
-                                    pattern="[0-9]*[.,]?[0-9]*"
-                                    oninput="this.value = this.value.replace(/,/g,'.')"
-                                    class="mt-1 block w-full rounded-md border border-gray-300 bg-slate-200 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                                    autocomplete="off"
-                                    >
-                                </div>
-                                <div class="inline-flex gap-2">
-                                    <label class="block text-sm text-slate-200">value</label>
-                                    <input
-                                    type="number"
-                                    name="value[]"
-                                    step="any"
-                                    inputmode="decimal"
-                                    pattern="[0-9]*[.,]?[0-9]*"
-                                    oninput="this.value = this.value.replace(/,/g,'.')"
-                                    class="mt-1 block w-full rounded-md border border-gray-300 bg-slate-200 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                                    autocomplete="off"
-                                    >
-                                </div>
-                            </div>
-                        {% endfor %}
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                         <div>
@@ -176,7 +128,6 @@
                             >
                         </div>
                     </div>
-                    {% endif %}
 
                     <div>
                     <button type="submit"
@@ -190,15 +141,16 @@
 
             <section class="bg-gray-800 glass rounded-xl p-6 shadow-lg">
                 <h2 class="text-lg font-semibold mb-3 text-slate-200">Problem</h2>
-                {% if results|length == 0 %}
+                {% if items|length == 0 %}
                     <p class="text-md font-semibold text-slate-200">Menunggu input...</p>
                 {% else %}
-                    <p class="text-md font-semibold text-slate-200">Diketahui nilai suatu barang dengan beratnya: </p>
+                    <p class="text-md font-semibold text-slate-200 mb-2">Diketahui ada {{ cities_count }} kota dengan jarak antar kota sebagai berikut: </p>
                     <table class="w-full text-left mb-3 table-auto border-collapse">
                         <thead>
                             <tr class="text-slate-300/80">
-                            {% for key, value in items.items %}
-                                <th class="px-4 py-2">{{ key }}</th>
+                                <th class="px-4 py-2"></th>
+                            {% for value in items.0 %}
+                                <th class="px-4 py-2">{{ value }}</th>
                             {% endfor %}
                                 <!-- <th class="px-4 py-2">Item</th>
                                 <th class="px-4 py-2">Berat</th>
@@ -208,10 +160,15 @@
                         </thead>
                         <tbody class="text-slate-200">
                             <tr class="border-t border-slate-700">
-                                {% for key, value in items.items %}
+                                <th class="px-4 py-2 text-slate-300/80">
+                                    {% for value in items.0 %}
+                                        <p>{{ value }}</p>
+                                    {% endfor %}
+                                </th>
+                                {% for value in items.1 %}
                                     <th class="px-4 py-2">
-                                        {% for key1, value1 in value.items %}
-                                            <p>{{ key1 }}: {{ value1 }}</p>
+                                        {% for value1 in value %}
+                                            <p>{{ value1 }}</p>
                                         {% endfor %}
                                     </th>
                                 {% endfor %}
@@ -220,82 +177,38 @@
                     </table>
 
                     <p class="text-md font-semibold text-slate-200">
-                        Bagaimana cara untuk memaksimalkan barang yang dibawa berdasarkan 
-                        nilai jika maksimal berat barang adalah {{ capacity }} menggunakan algoritma genetika selama {{ generations }} generasi?
+                        Bagaimana cara untuk menemukan rute terbaik menggunakan algoritma genetika selama {{ generations }} generasi?
                     </p>
                 {% endif %}
             </section>
 
             <section class="bg-gray-800 glass rounded-xl p-6 shadow-lg overflow-x-auto">
                 <h2 class="text-lg font-semibold mb-3 text-slate-200">Hasil Algoritma Genetika</h2>
-                {% if results|length == 0 %}
+                <p class="text-md text-slate-200">
+                    Jarak terbaik ditemukan adalah <a class="font-bold">{{ best_dist }}</a> dengan rute :
+                </p>
+                <p class="text-md text-slate-200 mb-4">
+                    {%for city in best_route %}
+                        <a class="font-bold">{{ city }}</a>{% if not forloop.last %} &rarr; {% endif %}
+                    {%endfor%}
+                </p>
+                    
+                {% if items|length == 0 %}
                     <p class="text-md font-semibold text-slate-200">Menunggu input...</p>
                 {% else %}
-                    <p class="text-md font-semibold text-slate-200">Generasi awal</p>
+                    <p class="text-md font-semibold text-slate-200">History</p>
                     <table class="w-full text-left mb-3 table-auto border-collapse">
-                        <thead>
-                            <tr class="text-slate-300/80">
-                                <th class="px-4 py-2">Kromosom</th>
-                                <th class="px-4 py-2">Item</th>
-                                <th class="px-4 py-2">Berat</th>
-                                <th class="px-4 py-2">Nilai</th>
-                                <th class="px-4 py-2">Fitness</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-slate-200">
-                            <tr class="border-t border-slate-700">
-                                <th class="px-4 py-2">{{ results.0.kromosom }}</th>
-                                <th class="px-4 py-2">{{ results.0.item }}</th>
-                                <th class="px-4 py-2">{{ results.0.berat }}</th>
-                                <th class="px-4 py-2">{{ results.0.nilai }}</th>
-                                <th class="px-4 py-2">{{ results.0.fitness }}</th>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <p class="text-md font-semibold text-slate-200">Generasi Terbaik</p>
-                    <table class="w-full text-left mb-3 table-auto border-collapse">
-                        <thead>
-                            <tr class="text-slate-300/80">
-                                <th class="px-4 py-2">Kromosom</th>
-                                <th class="px-4 py-2">Item</th>
-                                <th class="px-4 py-2">Berat</th>
-                                <th class="px-4 py-2">Nilai</th>
-                                <th class="px-4 py-2">Fitness</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-slate-200">
-                            <tr class="border-t border-slate-700">
-                                <th class="px-4 py-2">{{ best_result.kromosom }}</th>
-                                <th class="px-4 py-2">{{ best_result.item }}</th>
-                                <th class="px-4 py-2">{{ best_result.berat }}</th>
-                                <th class="px-4 py-2">{{ best_result.nilai }}</th>
-                                <th class="px-4 py-2">{{ best_result.fitness }}</th>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <p class="text-md font-semibold text-slate-200">Generasi</p>
-                    <table class="w-full text-left table-auto border-collapse">
                         <thead>
                             <tr class="text-slate-300/80">
                                 <th class="px-4 py-2">Generasi</th>
-                                <th class="px-4 py-2">Kromosom</th>
-                                <th class="px-4 py-2">Item</th>
-                                <th class="px-4 py-2">Berat</th>
-                                <th class="px-4 py-2">Nilai</th>
-                                <th class="px-4 py-2">Fitness</th>
+                                <th class="px-4 py-2">Jarak terbaik</th>
                             </tr>
                         </thead>
                         <tbody class="text-slate-200">
-                            {% for item in results %}
+                            {% for item in history %}
                             <tr class="border-t border-slate-700">
-                                <th class="px-4 py-2">{{ item.generasi }}</th>
-                                <th class="px-4 py-2">{{ item.kromosom }}</th>
-                                <th class="px-4 py-2">{{ item.item }}</th>
-                                <th class="px-4 py-2">{{ item.berat }}</th>
-                                <th class="px-4 py-2">{{ item.nilai }}</th>
-                                <th class="px-4 py-2">{{ item.fitness }}</th>
+                                <th class="px-4 py-2">Generasi ke-{{ forloop.counter }}</th>
+                                <th class="px-4 py-2">{{ item }}</th>
                             </tr>
                             {% endfor %}
                         </tbody>
